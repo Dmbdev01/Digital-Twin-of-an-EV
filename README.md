@@ -2,13 +2,20 @@
 MATLAB–Simulink digital twin of an electric ATV, combining real-world drive-cycle data, EV powertrain modeling, vehicle dynamics, and embedded telemetry for simulation and validation.
 
 
+## Project Preview
+
 <p align="center">
   <img src="docs/screenshots/simulink-model.png" width="850">
 </p>
 
+<p align="center">
+  <img src="docs/screenshots/vehicle-hardware.png" width="650">
+  <img src="docs/screenshots/voltage-vs-soc.png" width="650">
+</p>
+
 ---
 
-## 📌 Overview
+### Overview
 
 This project explores how a physical electric vehicle can be represented using a virtual model.
 
