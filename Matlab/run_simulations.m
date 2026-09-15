@@ -6,10 +6,19 @@ clear;
 clc;
 close all;
 
+%% Project Paths
+
+project_root = fileparts(fileparts(mfilename('fullpath')));
+
+addpath(genpath(fullfile(project_root, 'matlab')));
+
 %% Drive Cycle
 
-drive_cycle_file = ...
-    'data/example_drive_cycle.csv';
+drive_cycle_file = fullfile( ...
+    project_root, ...
+    'data', ...
+    'example', ...
+    'example_drive_cycle.csv');
 
 %% Run Simulation
 
