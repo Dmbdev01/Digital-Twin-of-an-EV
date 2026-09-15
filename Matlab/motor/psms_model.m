@@ -1,22 +1,23 @@
-function [motor_torque, motor_speed] = pmsm_model( ...
-    motor_speed, torque_command)
+function [motor_torque, motor_speed] = pmsm_model(control_command, motor_speed, params)
 % PMSM_MODEL
-% Represents the mechanical output interface of the
-% six-phase permanent magnet synchronous motor (PMSM).
+% Simplified interface for the six-phase PMSM used in the
+% Electric Vehicle Digital Twin.
 %
 % Inputs:
-%   motor_speed   - Motor speed (rad/s)
-%   torque_command - Requested motor torque (Nm)
+%   control_command - Motor control command
+%   motor_speed     - Motor speed (rad/s)
+%   params          - Project parameter structure
 %
 % Outputs:
-%   motor_torque  - Motor electromagnetic torque (Nm)
-%   motor_speed   - Motor speed (rad/s)
-%
-% The detailed electrical PMSM and inverter model is represented
-% in the Simulink/Simscape model.
+%   motor_torque    - Motor torque (Nm)
+%   motor_speed     - Motor speed (rad/s)
 
 %% Motor Torque
 
-motor_torque = torque_command;
+motor_torque = params.control.torque_gain * control_command;
+
+%% Prevent Negative Torque
+
+motor_torque = max(0, motor_torque);
 
 end
