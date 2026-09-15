@@ -1,23 +1,15 @@
-function [acceleration, forces] = vehicle_dynamics( ...
-    vehicle_speed, wheel_torque, grade_angle, params)
+function acceleration = vehicle_dynamics(wheel_torque, velocity, grade, params)
 % VEHICLE_DYNAMICS
-% Calculates the longitudinal dynamics of the electric vehicle.
+% Calculates longitudinal vehicle acceleration.
 %
 % Inputs:
-%   vehicle_speed  - Vehicle speed (m/s)
-%   wheel_torque   - Torque available at the wheels (Nm)
-%   grade_angle    - Road grade angle (rad)
-%   params         - Vehicle parameters from ev_parameters()
+%   wheel_torque - Torque applied at the wheels (Nm)
+%   velocity     - Vehicle velocity (m/s)
+%   grade        - Road gradient angle (rad)
+%   params       - Vehicle parameter structure
 %
-% Outputs:
-%   acceleration   - Vehicle acceleration (m/s^2)
-%   forces         - Individual longitudinal forces (N)
-%
-% The model considers:
-%   1. Traction force
-%   2. Aerodynamic drag
-%   3. Rolling resistance
-%   4. Road grade force
+% Output:
+%   acceleration - Vehicle longitudinal acceleration (m/s^2)
 
 %% Vehicle Parameters
 
@@ -35,15 +27,15 @@ F_traction = wheel_torque / r;
 
 %% Aerodynamic Drag
 
-F_drag = 0.5 * rho * Cd * A * vehicle_speed^2;
+F_drag = 0.5 * rho * Cd * A * velocity^2;
 
 %% Rolling Resistance
 
 F_roll = Crr * m * g;
 
-%% Grade Force
+%% Gradient Force
 
-F_grade = m * g * sin(grade_angle);
+F_grade = m * g * sin(grade);
 
 %% Net Force
 
@@ -52,13 +44,5 @@ F_net = F_traction - F_drag - F_roll - F_grade;
 %% Vehicle Acceleration
 
 acceleration = F_net / m;
-
-%% Store Individual Forces
-
-forces.traction = F_traction;
-forces.drag = F_drag;
-forces.rolling = F_roll;
-forces.grade = F_grade;
-forces.net = F_net;
 
 end
