@@ -22,6 +22,7 @@ params.vehicle.gravity = 9.81;          % Gravitational acceleration (m/s^2)
 
 params.drivetrain.gear_ratio = 6.5;     % Overall gear reduction
 params.drivetrain.efficiency = 0.90;    % Drivetrain efficiency
+params.control.torque_gain = 100;       % Driver command to torque scaling
 
 %% Battery Parameters
 
